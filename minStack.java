@@ -2,7 +2,7 @@ import java.util.Stack;
 
 class minStack {
     
-    // Created 2 stacks -
+    // Created 2 stacks for minStack -
     Stack<Integer> st1 = new Stack<>();
     Stack<Integer> st2 = new Stack<>();
     int min = Integer.MAX_VALUE;
