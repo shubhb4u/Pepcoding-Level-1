@@ -1,6 +1,6 @@
 import java.util.*;
 
-public class CountSubarraySumZero {
+public class SubarraySumEqualtoK {
     
     public static int solution(int[] arr, int k) {
         // write your code here
@@ -40,4 +40,3 @@ public class CountSubarraySumZero {
     }
     
 }
-
