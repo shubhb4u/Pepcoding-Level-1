@@ -16,13 +16,15 @@ public class SubarraySumEqualtoK {
             sum+= arr[i];
             if (map.containsKey(sum-k)){
                 
-                count += 1;
+                count++;
                 map.put(sum, sum-k);
             }
             else{
                 map.put(sum, 1);
             }
         }
+    
+        System.out.println(map);
         
         return count;
     }
