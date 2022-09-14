@@ -9,29 +9,28 @@ public class CountSubArraysEqualZeroesOnes {
         
         HashMap<Integer, Integer> map = new HashMap<>();
         int ratio = 0;
-        int freq = 0;
-        int sum = 0;
+        int count = 0;
         map.put(0,1);
 
         for (int i = 0 ; i<arr.length ; i++){
         
             if (arr[i] == 0){
                 ratio--;
-                freq = map.getOrDefault(ratio,0);
-                if (map.containsKey(freq)) sum+= freq;
-                map.put(ratio,freq-1);
+                if (map.containsKey(ratio)){
+                    count += map.getOrDefault(ratio,0);
+                }
+                map.put(ratio,map.getOrDefault(ratio,0)+1);
             }
             else{
                 ratio++;
-                freq = map.getOrDefault(ratio,0);
-                if (map.containsKey(freq)) sum+= freq;
-                map.put(ratio, freq+1);
+                if (map.containsKey(ratio)){
+                    count += map.getOrDefault(ratio,0);
+                }
+                map.put(ratio,map.getOrDefault(ratio,0)+1);
             }
         }
         
-//        System.out.println(map);
-        
-        return sum;
+        return count;
     }
     public static void main(String[] args) {
         Scanner scn = new Scanner(System.in);
@@ -41,6 +40,5 @@ public class CountSubArraysEqualZeroesOnes {
             arr[i] = scn.nextInt();
         }
         System.out.println(solution(arr));
-//        solution(arr);
     }
 }
