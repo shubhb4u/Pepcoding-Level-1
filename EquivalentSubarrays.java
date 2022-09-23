@@ -14,21 +14,22 @@ public class EquivalentSubarrays {
         HashSet<Integer> set = new HashSet<>();
         HashMap<Integer, Integer> map = new HashMap<>();
         
-        for (int i = 0 ; i< arr.length ; i++){
+        for (int i = 0; i < arr.length; i++){
             set.add(arr[i]);
         }
 
         int i = 0, j = 0, count = 0;
-//        boolean flag = true;
+        boolean flag = true;
+        
         while(j<arr.length){
             //Acquire -
             if (map.size() != set.size()){
                 map.put(arr[j],map.getOrDefault(arr[j],0)+1);
-//                flag = false;
+                flag = false;
                 j++;
             }
-            else {
-                count += arr.length-j-1;
+            if(map.size() == set.size()) {
+                count += arr.length-j+1;
                 int freq = map.get(arr[i]);
                 if (freq == 1){
                     map.remove(arr[i]);
@@ -36,12 +37,11 @@ public class EquivalentSubarrays {
                 else{
                     map.put(arr[i], freq - 1);
                 }
-//                flag = false;
+                flag = false;
                 i++;
             }
-//            if (flag == true) break;
+            if (flag == true) break;
         }
         System.out.println(count);
     }
-    
 }
