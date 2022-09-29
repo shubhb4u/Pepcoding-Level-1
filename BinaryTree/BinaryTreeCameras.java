@@ -29,7 +29,7 @@ public class BinaryTreeCameras {
         int res = status(root);
         //If there is just one node given it will pass -1.
         if(res == -1){
-            return count++;
+            return count+1;
         }
         return count;
         

@@ -82,14 +82,25 @@ class LevelOrderTraversal {
     
     public static void levelOrder(Node node) {
         // write your code here
-        Queue<Node> q = new ArrayDeque<>();
-        q.add(node);
+        Queue<Pair> q = new ArrayDeque<>();
+        Pair p = new Pair(node,0);
+        q.add(p);
+        HashMap<Integer,ArrayList<Pair>> map = new HashMap<>();
+        int state = 0;
+        
         while(q.size()>0){
-            int sz = q.size();
-            while (sz-- > 0){
+//            int sz = q.size();
+//            while (sz-- > 0){
                 
-                Node n  = q.remove();           // Remove
-                System.out.print(n.data+" ");     // Work
+                Pair rem  = q.remove();           // Remove
+                if (map.containsKey(rem.state)){
+                    // Work
+                }
+                else {
+                    ArrayList<Integer> newList = new ArrayList<>();
+                    newList.add(rem.node.data);
+                    map.put(s)
+                }
                 if (n.left != null){            // Add
                     q.add(n.left);
                 }
@@ -99,7 +110,7 @@ class LevelOrderTraversal {
             }
             System.out.println();
         }
-    }
+    
     
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
