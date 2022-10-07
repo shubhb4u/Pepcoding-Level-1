@@ -14,43 +14,51 @@ import static java.util.stream.Collectors.*;
 
 class newClass {
     
-    public static void main(String[] args) {
-    
-        Scanner scn = new Scanner(System.in);
-        int noofpairs_src_des = scn.nextInt();
-        HashMap<String, String> map = new HashMap<>();
-        for (int i = 0; i < noofpairs_src_des; i++) {
-            String s1 = scn.next();
-            String s2 = scn.next();
-            map.put(s1, s2);
-        }
-        System.out.println();
-    
-        scn.close();
-    
-        HashMap<String, Boolean> psrc = new HashMap<>();
-        for (String s : map.keySet()) {
-            psrc.put(map.get(s), false);
-        }
-    
-        String src = "";
-        for (String s : map.keySet()) {
-            if (!psrc.containsKey(s)) {
-                src = s;
-            }
-        }
-    
-        while (true) {
+    public static int solution(int [] A) {
         
-            if (map.containsKey(src) == true) {
-            
-                System.out.print(src + " -> ");
-                src = map.get(src);
-            } else {
-                System.out.print(src + ".");
-                break;
-            }
+        int minDifference = Integer.MAX_VALUE;
+        ArrayList<Integer> sides =  new ArrayList<>(); // To store potential sides
+        HashMap<Integer,Integer> map = new HashMap<>(); // To check the count of potential sides
+        
+        if (A.length<4) {
+            return -1;
         }
+        else{
+            
+            for (int i = 0; i<A.length ; i++){
+                map.put(A[i], map.getOrDefault(A[i],0)+1);
+            }
+            
+            
+            int count = 0; // To check if we have min 4 values to form a rectangle
+            for (int val : map.keySet()){
+                if (map.get(val)>=2){
+                    sides.add(val); //Add the potential rectangle sides to our arraylist.
+                    count++;
+                }
+            }
+            
+            Collections.sort(sides);
+            if (sides.size() >=2) {
+                minDifference = sides.get(sides.size() - 1) - sides.get(sides.size() - 2);
+                return minDifference;
+            }else{
+                if (map.size() == 1){
+                    minDifference = 0;
+                }
+            }
+            
+        }
+        return minDifference;
     }
+        public static void main(String[] args) {
     
+            Scanner scn = new Scanner(System.in);
+            int n = scn.nextInt();
+            int [] arr= new int[n];
+            for (int i = 0 ;i < n ;i++){
+                arr[i] = scn.nextInt();
+            }
+            System.out.println(solution(arr));
+        }
 }

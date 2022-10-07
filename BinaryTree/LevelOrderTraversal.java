@@ -7,31 +7,31 @@ class LevelOrderTraversal {
         int data;
         Node left;
         Node right;
-        
+
         Node(int data, Node left, Node right) {
             this.data = data;
             this.left = left;
             this.right = right;
         }
     }
-    
+
     public static class Pair {
         Node node;
         int state;
-        
+
         Pair(Node node, int state) {
             this.node = node;
             this.state = state;
         }
     }
-    
+
     public static Node construct(Integer[] arr) {
         Node root = new Node(arr[0], null, null);
         Pair rtp = new Pair(root, 1);
-        
+
         Stack<Pair> st = new Stack<>();
         st.push(rtp);
-        
+
         int idx = 0;
         while (st.size() > 0) {
             Pair top = st.peek();
@@ -44,7 +44,7 @@ class LevelOrderTraversal {
                 } else {
                     top.node.left = null;
                 }
-                
+
                 top.state++;
             } else if (top.state == 2) {
                 idx++;
@@ -55,63 +55,57 @@ class LevelOrderTraversal {
                 } else {
                     top.node.right = null;
                 }
-                
+
                 top.state++;
             } else {
                 st.pop();
             }
         }
-        
+
         return root;
     }
-    
+
     public static void display(Node node) {
         if (node == null) {
             return;
         }
-        
+
         String str = "";
         str += node.left == null ? "." : node.left.data + "";
         str += " <- " + node.data + " -> ";
         str += node.right == null ? "." : node.right.data + "";
         System.out.println(str);
-        
+
         display(node.left);
         display(node.right);
     }
-    
+
     public static void levelOrder(Node node) {
         // write your code here
-        Queue<Pair> q = new ArrayDeque<>();
-        Pair p = new Pair(node,0);
-        q.add(p);
-        HashMap<Integer,ArrayList<Pair>> map = new HashMap<>();
-        int state = 0;
+    
+        Queue<Node> q = new ArrayDeque<>();
+        q.add(node);
+    
+        while (q.size() > 0) {
+            int sz = q.size();
         
-        while(q.size()>0){
-//            int sz = q.size();
-//            while (sz-- > 0){
-                
-                Pair rem  = q.remove();           // Remove
-                if (map.containsKey(rem.state)){
-                    // Work
+            while (sz-- > 0) {
+            
+                Node rem = q.remove();
+                System.out.print(rem.data + " ");
+            
+                if (rem.left != null) {
+                    q.add(rem.left);
                 }
-                else {
-                    ArrayList<Integer> newList = new ArrayList<>();
-                    newList.add(rem.node.data);
-                    map.put(s)
-                }
-                if (n.left != null){            // Add
-                    q.add(n.left);
-                }
-                if (n.right != null){
-                    q.add(n.right);
+                if (rem.right != null) {
+                    q.add(rem.right);
                 }
             }
             System.out.println();
         }
-    
-    
+    }
+
+
     public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
         int n = Integer.parseInt(br.readLine());
@@ -124,9 +118,9 @@ class LevelOrderTraversal {
                 arr[i] = null;
             }
         }
-        
+
         Node root = construct(arr);
         levelOrder(root);
     }
-    
+
 }
