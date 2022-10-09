@@ -3,42 +3,33 @@ import java.util.*;
 
 class pairDivisibleByK {
     
-    public static void solution(int[] arr, int k){
+    public static boolean solution(int[] arr, int k){
         //write your code here
         
         HashMap<Integer,Integer> map = new HashMap<>();
-        for (int i = 0 ; i < arr.length ; i++){
-            
+        for (int i = 0 ; i< arr.length ; i++){
             int rem = arr[i]%k;
             if (rem < 0) rem = rem+k;
-            int freq = map.getOrDefault(rem , 0);
-            map.put(rem , freq+1);
+            map.put(rem,map.getOrDefault(rem,0)+1);
         }
+        System.out.println(map);
         
         for (int val : arr){
-            int rem = val%k;
-            if (rem < 0) {
-                rem = rem + k;
-            }
             
-            if (rem == 0 || (2*rem == k)){
+            int rem  = val%k;
+            if (rem < 0) rem = rem+k;
+            
+            if (rem == 0 || 2*rem == k){
                 int fq = map.get(rem);
-                if (fq%2 == 1){
-                    System.out.println(false);
-                    return;
-                }
+                if (fq%2 == 1) return false;
             }
             else{
                 int fq = map.get(rem);
-                int ofq = map.get(k-rem);
-                if (fq != ofq){
-                    System.out.println(false);
-                    return;
-                }
+                int ofq = map.getOrDefault(k-rem,0);
+                if (fq != ofq) return false;
             }
         }
-        System.out.println(true);
-        
+        return true;
     }
     
     public static void main(String[] args) {
@@ -49,7 +40,7 @@ class pairDivisibleByK {
             arr[i] = scn.nextInt();
         }
         int k = scn.nextInt();
-        solution(arr,k);
+        System.out.println(solution(arr,k));
     }
     
 }
