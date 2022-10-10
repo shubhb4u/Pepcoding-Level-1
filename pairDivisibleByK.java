@@ -6,13 +6,13 @@ class pairDivisibleByK {
     public static boolean solution(int[] arr, int k){
         //write your code here
         
+        //Save remainders and their count in a hashmap -
         HashMap<Integer,Integer> map = new HashMap<>();
         for (int i = 0 ; i< arr.length ; i++){
             int rem = arr[i]%k;
             if (rem < 0) rem = rem+k;
             map.put(rem,map.getOrDefault(rem,0)+1);
         }
-        System.out.println(map);
         
         for (int val : arr){
             
