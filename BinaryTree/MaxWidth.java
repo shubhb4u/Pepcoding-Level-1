@@ -1,7 +1,4 @@
-//{ Driver Code Starts
-//Initial Template for Java
-
-//Contributed by Sudarshan Sharma
+package BinaryTree;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.io.*;
@@ -111,28 +108,46 @@ class GfG {
 
 class Tree
 {
-    public ArrayList<Integer> diagonal(Node root)
-    {
-        //add your code here.
-        ArrayList<Integer> ans = new ArrayList<>();
-        Queue<Node> q = new ArrayDeque<>();
-        q.add(root);
+    public class Pair{
+        Node node;
+        int idx;
         
-        while(q.size() > 0){
-            Node rem = q.remove();
-            
-            while (rem != null) {
-                ans.add(rem.data);
-                if (rem.left != null){
-                    q.add(rem.left);
-                }
-                rem = rem.right;
-            }
+        Pair(Node node, int idx){
+            this.node = node;
+            this.idx= idx;
         }
-        return ans;
+    }
+    
+    public int widthOfBinaryTree(Node root) {
+        
+        Queue<Pair> q= new ArrayDeque<>();
+        q.add(new Pair(root,1));
+        int maxWidth = 0;
+        
+        while (q.size() > 0){
+            
+            int s = q.size();
+            int t = q.size();
+            int first = 0, last = 0;
+            
+            while (s>0) {
+                
+                Pair rem = q.remove();
+                int pid = rem.idx;
+    
+                if (s == t) first = pid;
+                if (s == 1) last = pid;
+    
+                if (rem.node.left != null) {
+                    q.add(new Pair(rem.node.left, pid*2));
+                }
+                if (rem.node.right != null) {
+                    q.add(new Pair(rem.node.right, pid*2+1));
+                }
+            }
+            
+            maxWidth = Math.max(maxWidth,last-first+1);
+        }
+        return maxWidth;
     }
 }
-
-
-//public class DiagonalTraversal {
-//}
