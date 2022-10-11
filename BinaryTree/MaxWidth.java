@@ -119,34 +119,32 @@ class Tree
     }
     
     public int widthOfBinaryTree(Node root) {
-        
-        Queue<Pair> q= new ArrayDeque<>();
+    
+        Queue<Pair> q = new ArrayDeque<>();
         q.add(new Pair(root,1));
-        int maxWidth = 0;
-        
+        int maxWidth = 1;
+    
         while (q.size() > 0){
+        
+            int firstIdx = 0, lastIdx = 0;
+        
+            for(int i=0; i<q.size() ;i++){
             
-            int s = q.size();
-            int t = q.size();
-            int first = 0, last = 0;
+                Pair temp = q.poll();
+                int pid = temp.idx;
             
-            while (s>0) {
-                
-                Pair rem = q.remove();
-                int pid = rem.idx;
-    
-                if (s == t) first = pid;
-                if (s == 1) last = pid;
-    
-                if (rem.node.left != null) {
-                    q.add(new Pair(rem.node.left, pid*2));
+                if(i==0) firstIdx = pid;
+                if(i==q.size()-1) lastIdx = pid;
+            
+                if (temp.node.left != null) {
+                    q.add(new Pair(temp.node.left, pid*2));
                 }
-                if (rem.node.right != null) {
-                    q.add(new Pair(rem.node.right, pid*2+1));
+                if (temp.node.right != null) {
+                    q.add(new Pair(temp.node.right, pid*2+1));
                 }
             }
-            
-            maxWidth = Math.max(maxWidth,last-first+1);
+        
+            maxWidth = Math.max(maxWidth,lastIdx-firstIdx+1);
         }
         return maxWidth;
     }
