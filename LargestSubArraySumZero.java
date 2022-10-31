@@ -7,25 +7,20 @@ public class LargestSubArraySumZero {
         // write your code here
         
         HashMap<Integer,Integer> map = new HashMap<>();
-        
         int sum = 0;
-        int idx = 0;
+        int idx = -1;
         int mlen = 0;
-        map.put(arr[0],idx);
+        map.put(sum,idx);
         
-        for (int i = 1 ; i < arr.length ; i++){
-            
+        for (int i = 0 ; i< arr.length; i++){
             sum += arr[i];
-            if (map.containsKey(sum)){
-                
-                int len = i - map.get(sum);
-                if (len > mlen) mlen = len;
+            if (map.containsKey(sum)) {
+                mlen = Math.max(mlen,i-map.get(sum));
             }
             else{
                 map.put(sum, i);
             }
         }
-        
         return mlen;
     }
     
