@@ -13,14 +13,15 @@ public class CharactersofItself {
     
         int i = 0, j = 0, min = Integer.MAX_VALUE;
         boolean flag = true;
-        while (j < str.length()){
+        while (j <= str.length()){
         
-            if (map.size() != set.size()){
+            if (map.size() != set.size() && j < str.length()){
                 map.put(str.charAt(j), map.getOrDefault(str.charAt(j),0)+1);
                 j++;
                 flag = false;
             }
             if(map.size() == set.size()){
+                
                 min = Math.min(min,j-i);
                 int freq = map.get(str.charAt(i));
                 if (freq == 1){
